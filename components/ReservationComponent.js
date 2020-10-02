@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, StyleSheet, Picker, Switch, Button, Modal } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import * as Animatable from 'react-native-animatable';
-import { Alert } from 'react-alert'
+import {Alert} from 'react-bootstrap/Alert';
 
 
 class Reservation extends Component {
@@ -34,9 +34,15 @@ class Reservation extends Component {
     }
 
     onSubmit() {
-        alert("Number of Campers:" {campers}
-        "Hike-In?" {hikeIn}
-        "Date:" {Date})
+        var Alert= require('react-bootstrap').Alert;
+        <Alert variant="success">
+        <Alert.Heading>Search for:</Alert.Heading>
+        <ul>
+        <li>"Number of Campers:" {campers}</li>
+        <li>"Hike-In?" {hikeIn}</li>
+        <li>"Date:" {Date}</li>
+        </ul>
+        </Alert>
     }
 
     render() {
