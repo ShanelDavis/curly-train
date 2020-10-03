@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, FlatList,
     Modal, Button, StyleSheet,
-    Alert, PanResponder } from 'react-native';import { Card, Icon } from 'react-native-elements';
+    Alert, PanResponder, Share } from 'react-native';
 import { baseUrl } from '../shared/baseUrl';
 import { connect } from 'react-redux';
 import { postFavorite } from '../redux/ActionCreators';
@@ -59,10 +59,20 @@ function RenderCampsite(props) {
 
             else if (recognizeComment(gestureState)) {
                 this.toggleModal();
-            }
-            
+            }          
         }
     });
+
+    const shareCampsite = (title, message, url) => {
+        Share.share({
+            title: title,
+            message: `${title}: ${message} ${url}`,
+            url: url
+        },{
+            dialogTitle: 'Share ' + title
+        });
+    };
+
 
     if (campsite) {
         return (
@@ -97,6 +107,15 @@ function RenderCampsite(props) {
                         reverse
                         onPress={() => props.onShowModal()}
                     />
+                    <Icon
+                            name={'share'}
+                            type='font-awesome'
+                            color='#5637DD'
+                            style={styles.cardItem}
+                            raised
+                            reverse
+                            onPress={() => shareCampsite(campsite.name, campsite.description, baseUrl + campsite.image)} 
+                        />
                 </View>
             </Card>
             </Animatable.View>
