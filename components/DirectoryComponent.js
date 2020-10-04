@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import Loading from './LoadingComponent';
 import * as Animatable from 'react-native-animatable';
-
+import { CAMPSITES } from '../shared/campsites';
 
 const mapStateToProps = state => {
     return {
@@ -15,7 +15,12 @@ const mapStateToProps = state => {
 
 class Directory extends Component {
 
-    
+        constructor(props) {
+            super(props);
+            this.state = { 
+                campsites:CAMPSITES
+             }
+        }
 
     static navigationOptions = {
         title: 'Directory'
@@ -37,19 +42,19 @@ class Directory extends Component {
             );
         };
 
-        if (this.props.campsites.isLoading) {
+       /* if (this.props.campsites.isLoading) {
             return <Loading />
         }
         if (this.props.campsites.errMess) {
             return (
                 <View>
-                    <Text>{this.props.campsite.errMess}</Text>
+                    <Text>{this.props.campsites.errMess}</Text>
                 </View>
             );
-        }
+        }*/
         return (
             <FlatList
-                data={this.props.campsites.campsites}
+                data={this.state.campsites}
                 renderItem={renderDirectoryItem}
                 keyExtractor={item => item.id.toString()}
                 />
